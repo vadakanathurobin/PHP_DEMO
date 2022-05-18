@@ -16,7 +16,7 @@ pipeline{
         sh "ssh -o StrictHostKeyChecking=no ${DEV_SERVER_IP} 'bash /home/ec2-user/docker-files/docker-script.sh'"
         sh "ssh ${DEV_SERVER_IP} sudo docker build -t ${IMAGE_NAME} /home/ec2-user/docker-files/"
         sh "ssh ${DEV_SERVER_IP} sudo docker login -u $USERNAME -p $PASSWORD"
-        sh "ssh ${DEV_SERVEr_IP} sudo docker push ${IMAGE_NAME}"
+        sh "ssh ${DEV_SERVER_IP} sudo docker push ${IMAGE_NAME}"
 
 }
 }
