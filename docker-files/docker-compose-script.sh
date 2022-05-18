@@ -1,1 +1,1 @@
-sudo DOCKER_IMAGE=$1 docker-compose -f /home/ec2-uer/docker-files/docker-compose.yml up -d
+sudo DOCKER_IMAGE=$1 docker-compose -f /home/ec2-user/docker-files/docker-compose.yml up -d
