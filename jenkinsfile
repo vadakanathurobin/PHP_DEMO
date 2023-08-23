@@ -15,7 +15,7 @@ pipeline{
            agent any
            steps{
             script{
-                sshagent(['ssh-key']) {
+                sshagent(['DEV_SERVER']) {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 echo "BUILD PHP DOCKERIMAGE AND PUSH TO DOCKERHUB"
                 sh "scp -o StrictHostKeyChecking=no -r docker-files ${BUILD_SERVER_IP}:/home/ec2-user"
