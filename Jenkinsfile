@@ -70,7 +70,7 @@ pipeline{
             sshagent(['DEV_SERVER']) {
     
     sh "scp -o StrictHostKeyChecking=no ansible/* ${ACM_IP}:/home/ec2-user"
-    sh "ssh -o StrictHostKeyChecking=no ${ACM_IP} 'envsubst < ~/docker-compose-var.yml > ~/docker-compose.yml'" 
+    sh "ssh -o StrictHostKeyChecking=no ${ACM_IP} 'envsubst ~/docker-compose-var.yml > ~/docker-compose.yml'" 
     //copy the ansible target key on ACM as private key file
     withCredentials([sshUserPrivateKey(credentialsId: 'Ansible_target',keyFileVariable: 'keyfile',usernameVariable: 'user')]){ 
     sh "scp  $keyfile ${ACM_IP}:/home/ec2-user/.ssh/id_rsa"    
