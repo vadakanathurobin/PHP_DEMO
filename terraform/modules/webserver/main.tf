@@ -18,6 +18,14 @@ resource "aws_security_group" "mywebsecurity" {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
      }
+
+      ingress {
+    description      = "HTTP"
+    from_port        = 8002
+    to_port          = 8002
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+     }
  
   egress {
     from_port        = 0
