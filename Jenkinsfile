@@ -23,7 +23,7 @@ pipeline {
             }
         }
         }
-       stage('DEPLOY DOCKER CONATINER USING DOCKER_COMPOSE'){
+       stage('DEPLOY DOCKER CONTAINER USING DOCKER_COMPOSE'){
            agent any
            steps{
                script{
