@@ -1,10 +1,10 @@
 pipeline{
     agent none
     environment{
-        BUILD_SERVER_IP='ec2-user@172.31.5.9'
+        BUILD_SERVER_IP='ec2-user@172.31.8.237'
         //DEPLOY_SERVER_IP='ec2-user@13.234.240.74'
         IMAGE_NAME='devopstrainer/java-mvn-privaterepos:php$BUILD_NUMBER'     
-        ACM_IP='ec2-user@172.31.41.138'
+        ACM_IP='ec2-user@172.31.37.116'
         AWS_ACCESS_KEY_ID =credentials("AWS_ACCESS_KEY_ID")
         AWS_SECRET_ACCESS_KEY=credentials("AWS_SECRET_ACCESS_KEY")
         //created a new credential of type secret text to store docker pwd
@@ -15,7 +15,7 @@ pipeline{
            agent any
            steps{
             script{
-                sshagent(['DEV_SERVER']) {
+                sshagent(['aws-key']) {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
                 echo "BUILD PHP DOCKERIMAGE AND PUSH TO DOCKERHUB"
                 sh "scp -o StrictHostKeyChecking=no -r docker-files ${BUILD_SERVER_IP}:/home/ec2-user"
@@ -67,7 +67,7 @@ pipeline{
     steps{
         script{
             echo "copy ansible files on ACM and run the playbook"
-            sshagent(['DEV_SERVER']) {
+            sshagent(['aws-key']) {
     //sh "ssh -o StrictHostKeyChecking=no ${ACM_IP} envsubst < ansible/docker-compose-var.yml > ansible/docker-compose.yml" 
     sh "scp -o StrictHostKeyChecking=no ansible/* ${ACM_IP}:/home/ec2-user"
     
