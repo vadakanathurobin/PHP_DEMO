@@ -3,7 +3,7 @@ services:
    web:
      image: "${DOCKER_IMAGE}"
      ports:
-     - 8001:80
+     - "8001:80"
      depends_on:
      - mysql
    mysql:
