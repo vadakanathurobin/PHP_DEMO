@@ -15,7 +15,7 @@ pipeline{
                         // Go to any Jenkins pipeline and use With Credentials in pipeline syntax to generate the below line
                         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'DOCKERPASSWORD', usernameVariable: 'DOCKERUSERNAME')]) {
                             sh "scp -o strictHostKeyChecking=no -r devserverconfig ${DEV_SERVER}:/home/ec2-user"
-                            sh "ssh -o strictHostKeyChecking=no ${DEV_SERVER} 'bash ~/docker-script.sh'"
+                            sh "ssh -o strictHostKeyChecking=no ${DEV_SERVER} 'bash ~/devserverconfig/docker-script.sh'"
                             sh "ssh ${DEV_SERVER} sud docker build -t ${IMAGE_NAME} /home/ec2-user/devserverconfig"
                             sh "ssh ${DEV_SERVER} sudo docker login -u ${DOCKERUSERNAME} -p ${DOCKERPASSWORD}"
                             sh "ssh ${DEV_SERVER} sudo docker push ${IMAGE_NAME}"
